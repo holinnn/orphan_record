@@ -13,6 +13,17 @@ module OrphanRecord
     end
 
     module ClassMethods
+      def new
+        @attributes = {}
+        @attributes_cache = {}
+        @new_record = true
+        @readonly = false
+        @destroyed = false
+        @marked_for_destruction = false
+        @previously_changed = {}
+        @changed_attributes = {}
+      end
+
       private
       def redefine_methods_for_orphan
         I18n.t("orphan_record.#{self.name.underscore}").each do |key, value|

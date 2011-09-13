@@ -38,7 +38,7 @@ OrphanRecord only redefine the url_for() helper it just return nil if the argume
 
   <%= link_to(user.user_name, url_for(user)) %>
   # will produce :
-  # <a href=''>Account deleted</a>
+  # <a href='#'>Account deleted</a>
 
   # if you don't want the <a></a> tag you can use the link_to_unless() helper
   <%= link_to_unless(user.adopter? user.user_name, url_for(user) %>

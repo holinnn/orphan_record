@@ -9,7 +9,7 @@ OrphanRecord makes it easy to return a default object instead of nil.
 
 in your Gemfile
 
-  gem "orpahn_record", :git => "git://github.com/holinnn/orpahn_record.git"
+  gem "orpahn_record", :git => "git://github.com/holinnn/orphan_record.git"
 
 Create an orphan_record.en.yml in the I18n load path, it should looks like :
 

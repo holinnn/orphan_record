@@ -44,5 +44,11 @@ module OrphanRecord
       end
       
     end
+
+    module InstanceMethods
+      def adopter?
+        false
+      end
+    end
   end
 end

@@ -25,6 +25,10 @@ module OrphanRecord
       def readonly?
         true
       end
+
+      def adopter?
+        true
+      end
     end
   end
 end

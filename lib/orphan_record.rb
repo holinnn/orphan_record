@@ -19,3 +19,4 @@ module OrphanRecord
   
 end
 
+require 'orphan_record/railtie'

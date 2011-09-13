@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Aurélien AMILIN"]
+  s.authors = ["Aurelien AMILIN"]
   s.date = %q{2011-09-13}
   s.description = %q{Manage ActiveRecord orphan records}
   s.email = %q{aurelien.amilin@gmail.com}

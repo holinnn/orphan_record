@@ -29,6 +29,10 @@ module OrphanRecord
       def adopter?
         true
       end
+
+      def id
+        0
+      end
     end
   end
 end

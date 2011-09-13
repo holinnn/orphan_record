@@ -20,6 +20,8 @@ Create an orphan_record.en.yml in the I18n load path, it should looks like :
 
 == Usage
 
+In your models:
+
   class User < ActiveRecord::Base
     has_many :comments, :dependent => :nullify
   end
@@ -29,6 +31,20 @@ Create an orphan_record.en.yml in the I18n load path, it should looks like :
     belongs_to :user
     can_be_abandoned_by :user
   end
+
+In your views :
+
+OrphanRecord only redefine the url_for() helper it just return nil if the argument is an ActiveRecord object and if it returns true when #adopter? is called.
+
+  <%= link_to(user.user_name, url_for(user)) %>
+  # will produce :
+  # <a href=''>Account deleted</a>
+
+  # if you don't want the <a></a> tag you can use the link_to_unless() helper
+  <%= link_to_unless(user.adopter? user.user_name, url_for(user) %>
+  # will produce :
+  # Account deleted
+
 
 In the background it will create an AdoptiveUser class wich inherits from the User class and includes the Singleton module, it will redefine every methods
 present in the translation file, key/value will become method_name/returned_value

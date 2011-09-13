@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'orphan_record/active_record'
 require 'orphan_record/adoptive_model'
+require 'orphan_record/helpers'
 
 module OrphanRecord
 

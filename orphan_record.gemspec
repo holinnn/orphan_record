@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/orphan_record/active_record.rb",
     "lib/orphan_record/adoptive_model.rb",
     "lib/orphan_record/railtie.rb",
+    "lib/orphan_record/helpers.rb",
     "spec/lib/active_record_spec.rb",
     "spec/lib/adoptive_model_spec.rb",
     "spec/spec_helper.rb",

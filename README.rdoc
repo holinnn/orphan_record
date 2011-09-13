@@ -1,0 +1,46 @@
+= OrphanRecord
+
+In some case you want to keep records that belongs to a deleted resource (ex: keep comments of a deleted user),
+but in this case you will have to manage the possibility that comment.user will return nil, so a lot of if/else in your views or helpers.
+
+OrphanRecord makes it easy to return a default object instead of nil.
+
+== Installation
+
+in your Gemfile
+
+  gem "orpahn_record", :git => "git://github.com/holinnn/orpahn_record.git"
+
+Create an orphan_record.en.yml in the I18n load path, it should looks like :
+
+  en:
+    orhpan_record:
+      adoptive_user:
+        user_name: Account deleted
+
+== Usage
+
+  class User < ActiveRecord::Base
+    has_many :comments, :dependent => :nullify
+  end
+
+  class Comment < ActiveRecord::Base
+    validates :user_id, :presence => true
+    belongs_to :user
+    can_be_abandoned_by :user
+  end
+
+In the background it will create an AdoptiveUser class wich inherits from the User class and includes the Singleton module, it will redefine every methods
+present in the translation file, key/value will become method_name/returned_value
+
+If you want to user a custom object instead of the Adoptive* classes you can use the :adopted_by option :
+
+  class Comment < ActiveRecord::Base
+    validates :user_id, :presence => true
+    belongs_to :user
+    can_be_abandoned_by :user, :adopted_by => AnotherSingleton.instance
+  end
+
+= Important
+
+You should not use OrphanRecord on relations that sometimes returns nil because it will always return the adoptive instance instead.

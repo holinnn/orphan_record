@@ -13,7 +13,7 @@ module OrphanRecord
     end
 
     module ClassMethods
-      def new
+      def initialize
         @attributes = {}
         @attributes_cache = {}
         @new_record = true

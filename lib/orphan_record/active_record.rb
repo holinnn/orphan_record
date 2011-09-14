@@ -20,8 +20,8 @@ module OrphanRecord
 
         adoptive_class_name = "Adoptive#{reflection.class_name}"
         create_adoptive_class(reflection, adoptive_class_name) unless Object.const_defined?(adoptive_class_name)
-        adopted_by = options[:adopted_by] || adoptive_class_name.constantize.instance
-        redefine_relation_for_adopter(relation, adopted_by)
+
+        redefine_relation_for_adopter(relation, options[:adopted_by], adoptive_class_name)
       end
 
       def create_adoptive_class(reflection, adoptive_class_name)
@@ -32,11 +32,11 @@ module OrphanRecord
         adoptive_class.instance_exec { include OrphanRecord::AdoptiveModel }
       end
 
-      def redefine_relation_for_adopter(relation, adopted_by = nil)
+      def redefine_relation_for_adopter(relation, adopted_by, adoptive_class_name)
         define_method(relation) do
           parent = send("original_#{relation}".to_sym)
           if(send("#{relation}_id".to_sym).nil? && parent.nil?)
-            adopted_by
+            adopted_by || adoptive_class_name.constantize.instance
           else
             parent
           end
